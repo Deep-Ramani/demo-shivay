@@ -1,0 +1,256 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+.loader-gif-container {
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+  }
+}
+
+.loader-gif {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .loader-gif {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .loader-gif-container {
+    padding: 8px;
+  }
+}
+
+.spraying-scene {
+  width: 600px;
+  height: 350px;
+  position: relative;
+  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 70%, #90EE90 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  padding: 20px;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(180deg, #8B7355 0%, #654321 100%);
+  border-radius: 0 0 20px 20px;
+  box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.crops {
+  position:80px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  gap: 60px;
+  padding: 0 60px;
+  align-items: flex-end;
+  padding: 0 50px;
+}
+
+.crop {
+  height: 45px;
+  background: linear-gradient(180deg, #90EE90 0%, #228B22 100%);
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  animation: grow 2s ease-in-out infinite;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.crop::before {
+  content: '🌾';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28anslateX(-50%);
+  font-size: 24px;
+}
+
+@keyframes grow {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.1);
+  }
+}
+
+.farmer {
+  position:30px;
+  left: 0;
+  animation: walk 5s linear infinite;
+}
+
+@keyframes walk {
+  0% {
+    left: -120px;
+  }
+  100% {
+    left: calc(100% + 120px);
+  }
+}
+
+.farmer-body {
+  font-size: 100px;
+  animation: bounce 0.5s ease-in-out infinite;
+  /* filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.4 */
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.sprayer {
+  position: absolute;
+  top: 30px;
+  left: -30px;
+  width: 60px;
+  height: 30px;
+}
+
+.spray-nozzle {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(90deg, #888 0%, #d32f2f 100%);
+  border-radius: 4px;
+  transform: rotate(-10deg);
+}
+
+.water-spray {
+  position: absolute;
+  left: -10px;
+  top: 15px;
+  width: 80px;
+  height: 60px;
+}
+
+.spray-particle {
+  position:8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(100, 200, 255, 0.9), rgba(100, 200, 255, 0.5));
+  border-radius: 50%;
+  animation: spray 0.8s ease-out infinite;
+  /* box-shadow: 0 0 8px rgba(100, 200, 255, 0.9), 0 0 15px rgba(100, 200, 255, 0.5 */
+  box-shadow: 0 0 4px rgba(100, 200, 255, 0.8);
+}
+
+.spray-particle:nth-child(1) {
+  animation-delay: 0s;
+  top: 5px;
+  left: 0;
+}
+
+.spray-particle:nth-child(2) {
+  animation-delay: 0.1s;
+  top: 10px;
+  left: 5px;
+}
+
+.spray-particle:nth-child(3) {
+  animation-delay: 0.2s;
+  top: 15px;
+  left: 10px;
+}
+
+.spray-particle:nth-child(4) {
+  animation-delay: 0.3s;
+  top: 20px;
+  left: 15px;
+}
+
+.spray-particle:nth-child(5) {
+  animation-delay: 0.4s;
+  top: 25px;
+  left: 20px;
+}
+
+.spray-particle:nth-child(6) {
+  animation-delay: 0.5s;
+  top: 30px;
+  left: 25px;
+}
+
+@keyframes spray {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-70px, 50px) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .spraying-scene {
+    width: 90%;
+    max-width: 400px;
+    height: 280px;
+  }
+
+  .farmer-body {
+    font-size: 70px;
+  }
+
+  .crops {
+    gap: 40px;
+    padding: 0 40px;
+  }
+
+  .crop {
+    width: 25px;
+    height: 35px;
+  }
+
+  .crop::before {
+    font-size: 20px;
+  }
+}
