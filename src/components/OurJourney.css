@@ -1,0 +1,217 @@
+.our-journey-section {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  padding: 60px 40px;
+  margin-top: 50px;
+  border-radius: 16px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.our-journey-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.our-journey-main-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin: 0 0 50px 0;
+}
+
+.journey-row {
+  display: flex;
+  align-items: center;
+}
+
+.video-wrapper {
+  width: 100%;
+}
+
+.video-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.video-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.play-icon {
+  font-size: 80px;
+  color: white;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.video-thumbnail:hover .play-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.video-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 40px 20px 15px 20px;
+  z-index: 1;
+}
+
+.event-name {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.journey-text-content {
+  padding-left: 20px;
+}
+
+.journey-paragraph {
+  font-size: 20px;
+  color: #e0e6ed;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+}
+
+.read-story-btn {
+  background: transparent !important;
+  color: white !important;
+  border: 2px solid white !important;
+  font-weight: 600;
+  font-size: 16px;
+  height: 50px;
+  padding: 0 40px;
+  border-radius: 8px;
+  margin-top: 16px;
+  transition: all 0.3s ease;
+}
+
+.read-story-btn:hover {
+  background: white !important;
+  color: #2c3e50 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .our-journey-main-title {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  .journey-text-content {
+    padding-left: 0;
+    margin-top: 20px;
+  }
+
+  .journey-paragraph {
+    font-size: 18px;
+  }
+
+  .play-icon {
+    font-size: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .our-journey-section {
+    padding: 40px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .our-journey-main-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .journey-paragraph {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .play-icon {
+    font-size: 56px;
+  }
+
+  .event-name {
+    font-size: 14px;
+  }
+
+  .read-story-btn {
+    height: 45px;
+    font-size: 15px;
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .our-journey-section {
+    padding: 30px 15px;
+  }
+
+  .our-journey-main-title {
+    font-size: 28px;
+  }
+
+  .journey-paragraph {
+    font-size: 15px;
+  }
+
+  .play-icon {
+    font-size: 48px;
+  }
+
+  .read-story-btn {
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+  }
+}
