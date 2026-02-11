@@ -1,0 +1,392 @@
+.spare-parts-page {
+  padding: 20px;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.spare-parts-page-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  padding: 15px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #c62828;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.breadcrumb-current {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 20px 0 30px 0;
+}
+
+/* Spare Parts Pills Section */
+.spare-parts-pills-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.scroll-arrow {
+  background: white !important;
+  border: 1px solid #e0e0e0 !important;
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.scroll-arrow:hover {
+  background: #f5f5f5 !important;
+  border-color: #c62828 !important;
+}
+
+.spare-parts-pills-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+  padding: 5px 0;
+}
+
+.spare-parts-pills-container::-webkit-scrollbar {
+  display: none;
+}
+
+.spare-parts-pill {
+  flex-shrink: 0;
+  padding: 12px 32px;
+  border: 2px solid #c62828;
+  border-radius: 50px;
+  background: white;
+  color: #c62828;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.spare-parts-pill:hover {
+  background: #c62828;
+  color: white;
+}
+
+.spare-parts-pill.active {
+  background: #c62828;
+  color: white;
+}
+
+.filter-btn {
+  flex-shrink: 0;
+  padding: 12px 24px;
+  height: auto;
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-btn:hover {
+  border-color: #c62828 !important;
+  color: #c62828 !important;
+}
+
+/* Progress Bar */
+.spare-parts-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.spare-parts-progress-fill {
+  height: 100%;
+  background: #c62828;
+  transition: width 0.3s ease;
+}
+
+/* Search Results Title */
+.search-results-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 25px 0;
+}
+
+/* Products Grid */
+.products-grid {
+  margin-bottom: 40px;
+}
+
+.product-card {
+  border-radius: 12px !important;
+  border: 1px solid #e0e0e0 !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  background: white;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  border-color: #c62828 !important;
+  box-shadow: 0 12px 28px rgba(198, 40, 40, 0.25) !important;
+  transform: scale(1.02);
+  z-index: 5;
+}
+
+.product-card .ant-card-body {
+  padding: 16px;
+}
+
+.product-image-wrapper {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-rating .ant-rate {
+  font-size: 16px;
+}
+
+.rating-text {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.product-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.4;
+  height: 42px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-savings {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.discount-percent {
+  font-size: 13px;
+  color: #388e3c;
+  font-weight: 600;
+}
+
+.savings-amount {
+  font-size: 13px;
+  color: #c62828;
+  font-weight: 500;
+}
+
+.product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.discounted-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.original-price {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.add-to-cart-btn {
+  flex: 1;
+  background: white !important;
+  color: #c62828 !important;
+  border: 2px solid #c62828 !important;
+  font-weight: 600;
+  font-size: 14px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.add-to-cart-btn:hover {
+  background: #c62828 !important;
+  color: white !important;
+  border-color: #c62828 !important;
+}
+
+.contact-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.contact-icon-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e0e0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-btn {
+  color: #333 !important;
+}
+
+.phone-btn:hover {
+  background: #4caf50 !important;
+  color: white !important;
+  border-color: #4caf50 !important;
+}
+
+.whatsapp-btn {
+  color: #25d366 !important;
+}
+
+.whatsapp-btn:hover {
+  background: #25d366 !important;
+  color: white !important;
+  border-color: #25d366 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .page-title {
+    font-size: 28px;
+  }
+
+  .spare-parts-pill {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  .filter-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .spare-parts-page {
+    padding: 15px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin: 15px 0 20px 0;
+  }
+
+  .spare-parts-pills-section {
+    gap: 10px;
+  }
+
+  .scroll-arrow {
+    display: none;
+  }
+
+  .spare-parts-pill {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .product-image-wrapper {
+    height: 200px;
+  }
+
+  .search-results-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spare-parts-page {
+    padding: 10px;
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .product-name {
+    font-size: 14px;
+  }
+
+  .discounted-price {
+    font-size: 20px;
+  }
+}

@@ -82,13 +82,14 @@
   border-radius: 12px !important;
   border: 2px solid #e0e0e0 !important;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .deal-card:hover {
   border-color: #d32f2f !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
-  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(211, 47, 47, 0.2) !important;
+  transform: scale(1.03);
+  z-index: 10;
 }
 
 .deal-card-image-wrapper {

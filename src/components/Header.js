@@ -7,13 +7,13 @@ function Header({ onLogoClick }) {
   return (
     <>
       <div className="flash-sale-banner">
-        ⚡ FLASH SALE ⚡ - Enjoy upto 60% off on all balwaan products
+        ⚡ FLASH SALE ⚡ - Enjoy upto 60% off on all Shivam Agrotech products
       </div>
       <header className="header">
         <div className="header-container">
           <div className="logo" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
-            <img src="/logo.png" alt="BALWAAN" />
-            <span className="logo-text">BALWAAN</span>
+            <img src="/logo.png" alt="Shivam Agrotech" />
+            <span className="logo-text">Shivam Agrotech</span>
           </div>
           
           <Input 
