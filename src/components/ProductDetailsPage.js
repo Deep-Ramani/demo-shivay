@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Button, Tabs, Card, Rate } from 'antd';
-import { ShareAltOutlined, PhoneOutlined, WhatsAppOutlined, ShoppingCartOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { ShareAltOutlined, PhoneOutlined, WhatsAppOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import './ProductDetailsPage.css';
 
 function ProductDetailsPage() {
@@ -216,7 +216,6 @@ Whether you're a farmer checking fields after dark, a security guard on patrol, 
                 <div className="price-section">
                   <span className="current-price">₹{product.discountedPrice.toLocaleString('en-IN')}</span>
                   <span className="original-price">₹{product.originalPrice.toLocaleString('en-IN')}</span>
-                  <span className="discount-badge">{product.discountPercent}% OFF</span>
                 </div>
                 <div className="savings-text">
                   You save ₹{product.savings.toLocaleString('en-IN')}
@@ -224,25 +223,6 @@ Whether you're a farmer checking fields after dark, a security guard on patrol, 
               </div>
 
               <div className="product-actions">
-                <Button className="bulk-quote-btn" size="large" block>
-                  Get bulk quote now
-                </Button>
-                <div className="action-buttons-row">
-                  <Button 
-                    className="add-to-cart-btn" 
-                    size="large"
-                    icon={<ShoppingCartOutlined />}
-                  >
-                    Add to cart
-                  </Button>
-                  <Button 
-                    className="buy-now-btn" 
-                    type="primary" 
-                    size="large"
-                  >
-                    Buy now
-                  </Button>
-                </div>
                 <div className="contact-buttons-row">
                   <Button 
                     className="phone-btn"
@@ -260,10 +240,6 @@ Whether you're a farmer checking fields after dark, a security guard on patrol, 
                   </Button>
                 </div>
               </div>
-
-              <div className="secure-badge">
-                🔒 All transactions are secure and encrypted
-              </div>
             </div>
           </Col>
         </Row>
@@ -276,27 +252,6 @@ Whether you're a farmer checking fields after dark, a security guard on patrol, 
             items={tabItems}
             className="product-tabs"
           />
-        </div>
-
-        {/* Customer Questions */}
-        <div className="customer-questions-section">
-          <h2 className="section-title">Customer questions</h2>
-          <div className="questions-actions">
-            <Button className="ask-question-btn" type="primary">
-              Ask a question
-            </Button>
-            <Button className="see-all-btn">
-              See all 0 question
-            </Button>
-          </div>
-          <div className="help-banner">
-            <span className="help-text">
-              👥 Need more help? <span className="help-link">Talk to our experts</span>
-            </span>
-            <Button className="call-now-btn" icon={<PhoneOutlined />}>
-              Call Now
-            </Button>
-          </div>
         </div>
 
         {/* Related Products */}
