@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Row, Col, Card, Button, Rate } from 'antd';
+import { Row, Col, Card, Button } from 'antd';
 import { PhoneOutlined, WhatsAppOutlined, LeftOutlined, RightOutlined, FilterOutlined } from '@ant-design/icons';
 import './SparePartsPage.css';
 
@@ -356,36 +356,14 @@ function SparePartsPage() {
                 }
               >
                 <div className="product-card-content">
-                  {product.rating && (
-                    <div className="product-rating">
-                      <Rate disabled defaultValue={product.rating} allowHalf />
-                      <span className="rating-text">
-                        {product.rating} ({product.totalRatings} rating)
-                      </span>
-                    </div>
-                  )}
-
                   <h3 className="product-name">{product.name}</h3>
                   
-                  <div className="product-savings">
-                    <span className="discount-percent">{product.discountPercent}% OFF</span>
-                    <span className="savings-amount">You save ₹{product.savings.toLocaleString('en-IN')}</span>
-                  </div>
-
                   <div className="product-price">
                     <span className="discounted-price">₹{product.discountedPrice.toLocaleString('en-IN')}</span>
                     <span className="original-price">₹{product.originalPrice.toLocaleString('en-IN')}</span>
                   </div>
 
                   <div className="product-actions">
-                    <Button 
-                      type="primary" 
-                      className="add-to-cart-btn"
-                      block
-                    >
-                      Add to cart
-                    </Button>
-                    
                     <div className="contact-icons">
                       <Button 
                         type="default" 
