@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Button } from 'antd';
 import { SearchOutlined, PhoneOutlined, WhatsAppOutlined } from '@ant-design/icons';
+import { ShivamLogo } from './Logo';
 import './Header.css';
 
 function Header({ onLogoClick }) {
@@ -11,9 +12,13 @@ function Header({ onLogoClick }) {
       </div>
       <header className="header">
         <div className="header-container">
-          <div className="logo" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
-            <img src="/logo.png" alt="Shivam Agrotech" />
-            <span className="logo-text">Shivam Agrotech</span>
+          <div className="logo">
+            <ShivamLogo 
+              width={180} 
+              height={60} 
+              onClick={onLogoClick}
+              verticalAlign="middle"
+            />
           </div>
           
           <Input 

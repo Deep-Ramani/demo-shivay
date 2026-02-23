@@ -4,6 +4,7 @@ import { PhoneOutlined, WhatsAppOutlined, LeftOutlined, RightOutlined } from '@a
 import './BestSellingProducts.css';
 
 function BestSellingProducts() {
+
   const products = [
     {
       id: 1,
@@ -11,7 +12,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=41',
       originalPrice: 15999,
       discountedPrice: 8999,
-      savings: 7000
+      savings: 7000,
+      status: 'Best Seller',
+      statusColor: '#ff9800'
     },
     {
       id: 2,
@@ -19,7 +22,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=42',
       originalPrice: 45000,
       discountedPrice: 32000,
-      savings: 13000
+      savings: 13000,
+      status: 'Hot Deal',
+      statusColor: '#ff5722'
     },
     {
       id: 3,
@@ -27,7 +32,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=43',
       originalPrice: 8999,
       discountedPrice: 6499,
-      savings: 2500
+      savings: 2500,
+      status: 'Trending',
+      statusColor: '#2196f3'
     },
     {
       id: 4,
@@ -35,7 +42,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=44',
       originalPrice: 6500,
       discountedPrice: 4999,
-      savings: 1501
+      savings: 1501,
+      status: 'Featured',
+      statusColor: '#9c27b0'
     },
     {
       id: 5,
@@ -43,7 +52,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=45',
       originalPrice: 12000,
       discountedPrice: 8500,
-      savings: 3500
+      savings: 3500,
+      status: 'New',
+      statusColor: '#4caf50'
     },
     {
       id: 6,
@@ -51,7 +62,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=46',
       originalPrice: 2500,
       discountedPrice: 1799,
-      savings: 701
+      savings: 701,
+      status: 'Best Seller',
+      statusColor: '#ff9800'
     },
     {
       id: 7,
@@ -59,7 +72,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=47',
       originalPrice: 18500,
       discountedPrice: 14999,
-      savings: 3501
+      savings: 3501,
+      status: 'Hot Deal',
+      statusColor: '#ff5722'
     },
     {
       id: 8,
@@ -67,7 +82,9 @@ function BestSellingProducts() {
       image: 'https://picsum.photos/300/300?random=48',
       originalPrice: 25000,
       discountedPrice: 19999,
-      savings: 5001
+      savings: 5001,
+      status: 'Trending',
+      statusColor: '#2196f3'
     }
   ];
 
@@ -83,51 +100,60 @@ function BestSellingProducts() {
     <section className="best-selling-section">
       <div className="best-selling-header">
         <h2 className="best-selling-title">Best Selling Products</h2>
+        <div className="header-nav-arrows">
+          <button className="nav-arrow-btn" onClick={scrollLeft}>
+            <LeftOutlined />
+          </button>
+          <button className="nav-arrow-btn" onClick={scrollRight}>
+            <RightOutlined />
+          </button>
+        </div>
       </div>
 
       <div className="best-selling-carousel-wrapper">
-        <Button 
-          className="scroll-btn scroll-btn-left" 
-          icon={<LeftOutlined />}
-          onClick={scrollLeft}
-          shape="circle"
-          size="large"
-        />
 
         <div className="best-selling-scroll-container">
           <Row gutter={[20, 20]} wrap={false} className="best-selling-row">
             {products.map(product => (
               <Col key={product.id} flex="0 0 280px">
-                <Card 
+                <Card
                   hoverable
                   className="best-selling-card"
                   cover={
                     <div className="best-selling-card-image-wrapper">
+                      <div className="card-badges">
+                        <span className="status-badge" style={{ backgroundColor: product.statusColor }}>
+                          {product.status}
+                        </span>
+
+                      </div>
                       <img alt={product.name} src={product.image} className="best-selling-card-image" />
                     </div>
                   }
                 >
                   <div className="best-selling-card-content">
                     <h3 className="best-selling-product-name">{product.name}</h3>
-                    
+
                     <div className="savings-info">
                       <span className="savings-amount">You save ₹{product.savings.toLocaleString('en-IN')}</span>
                     </div>
 
                     <div className="card-footer">
                       <div className="contact-icons">
-                        <Button 
-                          type="default" 
-                          shape="circle" 
+                        <Button
+                          type="primary"
+                          shape="circle"
                           icon={<PhoneOutlined />}
-                          className="contact-icon-btn phone-btn"
+                          size="large"
+                          className="deal-phone-btn"
                           title="Call Us"
                         />
-                        <Button 
-                          type="default" 
-                          shape="circle" 
+                        <Button
+                          type="primary"
+                          shape="circle"
                           icon={<WhatsAppOutlined />}
-                          className="contact-icon-btn whatsapp-btn"
+                          size="large"
+                          className="deal-whatsapp-btn"
                           title="WhatsApp Us"
                         />
                       </div>
@@ -138,14 +164,6 @@ function BestSellingProducts() {
             ))}
           </Row>
         </div>
-
-        <Button 
-          className="scroll-btn scroll-btn-right" 
-          icon={<RightOutlined />}
-          onClick={scrollRight}
-          shape="circle"
-          size="large"
-        />
       </div>
     </section>
   );

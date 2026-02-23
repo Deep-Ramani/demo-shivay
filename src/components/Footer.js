@@ -8,6 +8,7 @@ import {
   YoutubeOutlined, 
   WhatsAppOutlined 
 } from '@ant-design/icons';
+import { ShivamLogo } from './Logo';
 import './Footer.css';
 
 function Footer() {
@@ -42,9 +43,10 @@ function Footer() {
         <Row gutter={[40, 40]} className="footer-main">
           <Col xs={24} sm={24} md={12} lg={8}>
             <div className="footer-brand">
-              <img 
-                src="https://via.placeholder.com/180x60/c62828/ffffff?text=Shivam+Agrotech" 
-                alt="Shivam Agrotech Logo" 
+              <ShivamLogo 
+                width={180} 
+                height={60} 
+                verticalAlign="middle"
                 className="footer-logo"
               />
               <p className="footer-description">
