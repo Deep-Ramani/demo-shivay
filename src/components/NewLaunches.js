@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Row, Col, Button } from 'antd';
-import { PhoneOutlined, WhatsAppOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { PhoneOutlined, WhatsAppOutlined, LeftOutlined, RightOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
 import './NewLaunches.css';
 
 function NewLaunches() {
+  const [favorites, setFavorites] = useState({});
+
   const products = [
     {
       id: 1,
@@ -12,7 +14,9 @@ function NewLaunches() {
       originalPrice: 2249,
       discountedPrice: 1490,
       savings: 759,
-      discountPercent: '33% OFF'
+      discountPercent: '33% OFF',
+      status: 'New',
+      statusColor: '#4caf50'
     },
     {
       id: 2,
@@ -21,7 +25,9 @@ function NewLaunches() {
       originalPrice: 2459,
       discountedPrice: 1490,
       savings: 969,
-      discountPercent: '39% OFF'
+      discountPercent: '39% OFF',
+      status: 'Hot Deal',
+      statusColor: '#ff5722'
     },
     {
       id: 3,
@@ -30,7 +36,9 @@ function NewLaunches() {
       originalPrice: 1999,
       discountedPrice: 1190,
       savings: 809,
-      discountPercent: '40% OFF'
+      discountPercent: '40% OFF',
+      status: 'Trending',
+      statusColor: '#2196f3'
     },
     {
       id: 4,
@@ -39,7 +47,9 @@ function NewLaunches() {
       originalPrice: 900,
       discountedPrice: 690,
       savings: 300,
-      discountPercent: '30% OFF'
+      discountPercent: '30% OFF',
+      status: 'Featured',
+      statusColor: '#9c27b0'
     },
     {
       id: 5,
@@ -48,7 +58,9 @@ function NewLaunches() {
       originalPrice: 490,
       discountedPrice: 350,
       savings: 140,
-      discountPercent: '28% OFF'
+      discountPercent: '28% OFF',
+      status: 'New',
+      statusColor: '#4caf50'
     },
     {
       id: 6,
@@ -59,7 +71,9 @@ function NewLaunches() {
       savings: 40000,
       discountPercent: '25% OFF',
       rating: 4.9,
-      totalRatings: 115
+      totalRatings: 115,
+      status: 'Best Seller',
+      statusColor: '#ff9800'
     },
     {
       id: 7,
@@ -68,7 +82,9 @@ function NewLaunches() {
       originalPrice: 8999,
       discountedPrice: 5999,
       savings: 3000,
-      discountPercent: '33% OFF'
+      discountPercent: '33% OFF',
+      status: 'Hot Deal',
+      statusColor: '#ff5722'
     },
     {
       id: 8,
@@ -77,9 +93,18 @@ function NewLaunches() {
       originalPrice: 12500,
       discountedPrice: 8750,
       savings: 3750,
-      discountPercent: '30% OFF'
+      discountPercent: '30% OFF',
+      status: 'Trending',
+      statusColor: '#2196f3'
     }
   ];
+
+  const toggleFavorite = (id) => {
+    setFavorites(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   const scrollLeft = () => {
     document.querySelector('.new-launches-scroll-container').scrollBy({ left: -320, behavior: 'smooth' });
@@ -93,51 +118,68 @@ function NewLaunches() {
     <section className="new-launches-section">
       <div className="new-launches-header">
         <h2 className="new-launches-title">New Launches</h2>
+        <div className="header-nav-arrows">
+          <button className="nav-arrow-btn" onClick={scrollLeft}>
+            <LeftOutlined />
+          </button>
+          <button className="nav-arrow-btn" onClick={scrollRight}>
+            <RightOutlined />
+          </button>
+        </div>
       </div>
 
       <div className="new-launches-carousel-wrapper">
-        <Button 
-          className="scroll-btn scroll-btn-left" 
-          icon={<LeftOutlined />}
-          onClick={scrollLeft}
-          shape="circle"
-          size="large"
-        />
 
         <div className="new-launches-scroll-container">
           <Row gutter={[20, 20]} wrap={false} className="new-launches-row">
             {products.map(product => (
               <Col key={product.id} flex="0 0 280px">
-                <Card 
+                <Card
                   hoverable
                   className="new-launch-card"
                   cover={
                     <div className="new-launch-card-image-wrapper">
+                      <div className="card-badges">
+                        <span className="status-badge" style={{ backgroundColor: product.statusColor }}>
+                          {product.status}
+                        </span>
+                        <button
+                          className="favorite-btn"
+                          onClick={() => toggleFavorite(product.id)}
+                        >
+                          {favorites[product.id] ?
+                            <HeartFilled style={{ color: '#ff4d4f' }} /> :
+                            <HeartOutlined />
+                          }
+                        </button>
+                      </div>
                       <img alt={product.name} src={product.image} className="new-launch-card-image" />
                     </div>
                   }
                 >
                   <div className="new-launch-card-content">
                     <h3 className="new-launch-product-name">{product.name}</h3>
-                    
+
                     <div className="savings-info">
                       <span className="savings-amount">You save ₹{product.savings.toLocaleString('en-IN')}</span>
                     </div>
 
                     <div className="card-footer">
                       <div className="contact-icons">
-                        <Button 
-                          type="default" 
-                          shape="circle" 
+                        <Button
+                          type="primary"
+                          shape="circle"
                           icon={<PhoneOutlined />}
-                          className="contact-icon-btn phone-btn"
+                          size="large"
+                          className="deal-phone-btn"
                           title="Call Us"
                         />
-                        <Button 
-                          type="default" 
-                          shape="circle" 
+                        <Button
+                          type="primary"
+                          shape="circle"
                           icon={<WhatsAppOutlined />}
-                          className="contact-icon-btn whatsapp-btn"
+                          size="large"
+                          className="deal-whatsapp-btn"
                           title="WhatsApp Us"
                         />
                       </div>
@@ -148,14 +190,6 @@ function NewLaunches() {
             ))}
           </Row>
         </div>
-
-        <Button 
-          className="scroll-btn scroll-btn-right" 
-          icon={<RightOutlined />}
-          onClick={scrollRight}
-          shape="circle"
-          size="large"
-        />
       </div>
     </section>
   );
