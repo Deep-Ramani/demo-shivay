@@ -1,27 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Design tokens ────────────────────────────────────────────── */
+:root {
+  /* Green palette */
+  --gold:        #2d9e5e;
+  --gold-light:  #3dbe70;
+  --gold-dark:   #1c7a44;
+
+  /* Light backgrounds */
+  --bg:          #ffffff;
+  --bg-white:    #ffffff;
+  --bg-card:     #ffffff;
+  --bg-section:  #e3fae8;
+
+  /* Borders */
+  --border:      #c8e8d0;
+  --border-gold: rgba(45, 158, 94, 0.35);
+
+  /* Text */
+  --text:        #1a1a1a;
+  --text-gray:   #666666;
+  --text-muted:  #999999;
+}
+
+/* ── Reset ────────────────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f5f5f5;
+  background: var(--bg);
+  color: var(--text);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-button {
-  font-family: inherit;
-}
-
-input {
-  font-family: inherit;
-}
+button { font-family: inherit; }
+input  { font-family: inherit; }

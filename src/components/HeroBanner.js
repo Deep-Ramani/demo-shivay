@@ -11,7 +11,7 @@ function HeroBanner() {
       highlight: 'FASTEST',
       subtitle: 'FREE HOME DELIVERY*',
       image: 'https://picsum.photos/800/400?random=1',
-      color: 'linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #90EE90 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #0ea5e9 100%)'
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ function HeroBanner() {
       highlight: 'QUALITY',
       subtitle: 'PRODUCTS FOR YOU',
       image: 'https://picsum.photos/800/400?random=2',
-      color: 'linear-gradient(180deg, #FFE5B4 0%, #FFDAB9 50%, #FFB6C1 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #38bdf8 100%)'
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ function HeroBanner() {
       highlight: 'OFFERS',
       subtitle: 'UPTO 60% OFF*',
       image: 'https://picsum.photos/800/400?random=3',
-      color: 'linear-gradient(180deg, #E6E6FA 0%, #DDA0DD 50%, #DA70D6 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #0891b2 55%, #22d3ee 100%)'
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ function HeroBanner() {
       highlight: 'ARRIVALS',
       subtitle: 'CHECK OUT NOW',
       image: 'https://picsum.photos/800/400?random=4',
-      color: 'linear-gradient(180deg, #FFDAB9 0%, #FFB6C1 50%, #FFA07A 100%)'
+      color: 'linear-gradient(135deg, #1e293b 0%, #334155 40%, #0ea5e9 100%)'
     },
     {
       id: 5,
@@ -43,7 +43,7 @@ function HeroBanner() {
       highlight: 'SELLERS',
       subtitle: 'TRENDING PRODUCTS',
       image: 'https://picsum.photos/800/400?random=5',
-      color: 'linear-gradient(180deg, #B0E0E6 0%, #87CEEB 50%, #4682B4 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #60a5fa 100%)'
     },
     {
       id: 6,
@@ -51,7 +51,7 @@ function HeroBanner() {
       highlight: 'DEALS',
       subtitle: 'LIMITED TIME ONLY',
       image: 'https://picsum.photos/800/400?random=6',
-      color: 'linear-gradient(180deg, #98FB98 0%, #90EE90 50%, #3CB371 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #155e75 55%, #0e7490 100%)'
     },
     {
       id: 7,
@@ -59,7 +59,7 @@ function HeroBanner() {
       highlight: 'SMART',
       subtitle: 'SAVE MORE TODAY',
       image: 'https://picsum.photos/800/400?random=7',
-      color: 'linear-gradient(180deg, #FFFFE0 0%, #FFFACD 50%, #FFD700 100%)'
+      color: 'linear-gradient(135deg, #1e293b 0%, #1e3a5f 50%, #3b82f6 100%)'
     },
     {
       id: 8,
@@ -67,7 +67,7 @@ function HeroBanner() {
       highlight: 'FAVORITE',
       subtitle: 'TOP RATED ITEMS',
       image: 'https://picsum.photos/800/400?random=8',
-      color: 'linear-gradient(180deg, #FFC0CB 0%, #FFB6C1 50%, #FF69B4 100%)'
+      color: 'linear-gradient(135deg, #0f172a 0%, #0c4a6e 55%, #0ea5e9 100%)'
     }
   ];
 
@@ -113,8 +113,8 @@ function HeroBanner() {
               </div>
               
               <div className="snow-effect">
-                {[...Array(30)].map((_, i) => (
-                  <div key={i} className="snowflake" style={{
+                {Array.from({ length: 30 }).map((_, i) => (
+                  <div key={`flake-${slide.id}-${i}`} className="snowflake" style={{
                     left: `${Math.random() * 100}%`,
                     animationDelay: `${Math.random() * 5}s`,
                     animationDuration: `${5 + Math.random() * 10}s`

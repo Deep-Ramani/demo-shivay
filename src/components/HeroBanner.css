@@ -1,8 +1,8 @@
 .hero-banner-container {
   margin: 0 20px 30px 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.15), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hero-carousel .slick-dots {
@@ -10,18 +10,17 @@
 }
 
 .hero-carousel .slick-dots li button {
-  background: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.35) !important;
   border-radius: 50%;
 }
 
 .hero-carousel .slick-dots li.slick-active button {
-  background: #d32f2f !important;
+  background: #38bdf8 !important;
   width: 12px;
   height: 12px;
 }
 
 .hero-banner {
-  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #90EE90 100%);
   position: relative;
   overflow: hidden;
 }
@@ -44,23 +43,25 @@
   font-size: 48px;
   line-height: 1.2;
   margin: 0 0 30px 0;
-  color: #333;
+  color: #f1f5f9;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-title-outline {
   font-size: 72px;
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 3px #333;
-  text-stroke: 3px #333;
+  -webkit-text-stroke: 3px #38bdf8;
   display: inline-block;
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.4));
 }
 
 .hero-title-bold {
   font-size: 52px;
   font-weight: 900;
-  color: #d32f2f;
+  color: #38bdf8;
   display: inline-block;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
 
 .hero-image {
@@ -75,11 +76,11 @@
   max-width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.2);
 }
 
 .shop-now-btn {
-  background: #d32f2f !important;
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9) !important;
   color: white !important;
   border: none !important;
   border-radius: 50px !important;
@@ -87,17 +88,19 @@
   font-size: 24px !important;
   font-weight: 700 !important;
   height: auto !important;
-  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .shop-now-btn:hover {
-  background: #b71c1c !important;
+  background: linear-gradient(135deg, #1e40af, #0284c7) !important;
   transform: scale(1.05);
+  box-shadow: 0 6px 28px rgba(14, 165, 233, 0.55) !important;
 }
 
 .arrow-circle {
-  background: #ffeb3b;
-  color: #333;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -106,6 +109,7 @@
   justify-content: center;
   font-size: 20px;
   margin-left: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .hero-footer {
@@ -116,10 +120,9 @@
 }
 
 .terms {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  color: #bae6fd;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .snow-effect {
@@ -135,8 +138,8 @@
 .snowflake {
   position: absolute;
   top: -10px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 20px;
+  color: rgba(56, 189, 248, 0.5);
+  font-size: 18px;
   animation: fall linear infinite;
 }
 
@@ -152,20 +155,27 @@
     padding: 30px;
     min-height: auto;
   }
-  
+
   .hero-title {
     font-size: 36px;
   }
-  
+
   .hero-title-outline {
     font-size: 52px;
   }
-  
+
   .hero-title-bold {
     font-size: 40px;
   }
-  
-  .hero-illustration {
-    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .hero-banner-container {
+    margin: 0 0 24px 0;
+    border-radius: 0;
+  }
+
+  .hero-content {
+    padding: 24px 20px;
   }
 }

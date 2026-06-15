@@ -1,66 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { WhatsAppOutlined } from '@ant-design/icons';
 import './App.css';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import HeroBanner from './components/HeroBanner';
-import Categories from './components/Categories';
-import CategoriesPage from './components/CategoriesPage';
-import SparePartsPage from './components/SparePartsPage';
-import ProductDetailsPage from './components/ProductDetailsPage';
-import SpecialDeals from './components/SpecialDeals';
-import LiveStats from './components/LiveStats';
-import NewLaunches from './components/NewLaunches';
+import HeroSection from './components/HeroSection';
 import TrustedBanner from './components/TrustedBanner';
-import BestSellingProducts from './components/BestSellingProducts';
-import OurJourney from './components/OurJourney';
+import Categories from './components/Categories';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
+import ContactSection from './components/ContactSection';
 
 function App() {
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader,   setShowLoader]   = useState(false);
+  const [loaderExiting, setLoaderExiting] = useState(false);
 
-  const handleLogoClick = () => {
+  const handleLogoClick = useCallback(() => {
+    setLoaderExiting(false);
     setShowLoader(true);
-    
-    // Hide loader after animation completes
+    setTimeout(() => setLoaderExiting(true), 2800);
     setTimeout(() => {
       setShowLoader(false);
-    }, 4000);
-  };
-
-  useEffect(() => {
-    // Removed animation class logic since new loader doesn't need it
-  }, [showLoader]);
+      setLoaderExiting(false);
+      document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 3300);
+  }, []);
 
   return (
     <Router>
       <div className="App">
-        {showLoader && <Loader />}
+        {showLoader && <Loader exiting={loaderExiting} />}
         <Header onLogoClick={handleLogoClick} />
-        <div className="main-container">
-          <Sidebar />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={
-                <>
-                  <HeroBanner />
-                  <Categories />
-                  <SpecialDeals />
-                  <LiveStats />
-                  <NewLaunches />
-                  <TrustedBanner />
-                  <BestSellingProducts />
-                  <OurJourney />
-                </>
-              } />
-              <Route path="/categories/:categoryName" element={<CategoriesPage />} />
-              <Route path="/spare-parts/:categoryName" element={<SparePartsPage />} />
-              <Route path="/product/:type/:productId" element={<ProductDetailsPage />} />
-            </Routes>
-            <Footer />
-          </main>
-        </div>
+
+        <Routes>
+          {/* ── Homepage ───────────────────────────────────────── */}
+          <Route
+            path="/"
+            element={
+              <>
+                <main className="main-content">
+                  <HeroSection />
+                  <section id="trusted"><TrustedBanner /></section>
+                  <section id="categories"><Categories /></section>
+                  <section id="contact"><ContactSection /></section>
+                </main>
+                <Footer />
+              </>
+            }
+          />
+
+        </Routes>
+
+        {/* Floating WhatsApp */}
+        <a
+          href="https://wa.me/918320287041"
+          className="floating-whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp"
+        >
+          <WhatsAppOutlined />
+        </a>
       </div>
     </Router>
   );
