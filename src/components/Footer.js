@@ -1,121 +1,130 @@
-import React from 'react';
-import { Row, Col } from 'antd';
-import { 
-  LinkedinOutlined, 
-  FacebookOutlined, 
-  InstagramOutlined, 
-  TwitterOutlined, 
-  YoutubeOutlined, 
-  WhatsAppOutlined 
-} from '@ant-design/icons';
-import { ShivamLogo } from './Logo';
+import { InstagramOutlined, FacebookOutlined, WhatsAppOutlined, EnvironmentOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
+const quickLinks = [
+  { name: 'Home',       to: '/'            },
+  { name: 'Categories', to: '/#categories' },
+  { name: 'About Us',   to: '#'            },
+  { name: 'Contact Us', to: '#'            },
+  { name: 'Locate Us',  to: '#'            },
+];
+
+const categories = [
+  { name: 'OEM Products',     to: '/#categories' },
+  { name: 'Battery Sprayers', to: '/#categories' },
+  { name: 'Brush Cutters',    to: '/#categories' },
+  { name: 'Water Pumps',      to: '/#categories' },
+  { name: 'Chainsaws',        to: '/#categories' },
+  { name: 'Tillers',          to: '/#categories' },
+];
+
 function Footer() {
-  const companyLinks = [
-    { name: 'About Shivam Agrotech', url: '#' },
-    { name: 'Careers', url: '#' },
-    { name: 'Privacy Policy', url: '#' },
-    { name: 'Return Policy', url: '#' },
-    { name: 'Terms and Conditions', url: '#' },
-    { name: 'Submit your complaint', url: '#' }
-  ];
-
-  const helpLinks = [
-    { name: 'Track your order', url: '#' },
-    { name: 'Contact us', url: '#' },
-    { name: 'Sitemap', url: '#' },
-    { name: 'Join our WhatsApp Channel', url: '#' }
-  ];
-
-  const socialLinks = [
-    { icon: <LinkedinOutlined />, url: '#', name: 'LinkedIn' },
-    { icon: <FacebookOutlined />, url: '#', name: 'Facebook' },
-    { icon: <InstagramOutlined />, url: '#', name: 'Instagram' },
-    { icon: <TwitterOutlined />, url: '#', name: 'Twitter' },
-    { icon: <YoutubeOutlined />, url: '#', name: 'YouTube' },
-    { icon: <WhatsAppOutlined />, url: '#', name: 'WhatsApp' }
-  ];
-
   return (
     <footer className="footer">
-      <div className="footer-content">
-        <Row gutter={[40, 40]} className="footer-main">
-          <Col xs={24} sm={24} md={12} lg={8}>
-            <div className="footer-brand">
-              <ShivamLogo 
-                width={180} 
-                height={60} 
-                verticalAlign="middle"
-                className="footer-logo"
-              />
-              <p className="footer-description">
-                One of India's fastest-growing Agri machines & tools brands. You will find the best selection of tillers, brush cutters, augers, sprayers, and other outdoor power tools here. From rural to urban areas, Shivam Agrotech will help you manage your outdoor work quickly, efficiently and easily!
-              </p>
-            </div>
-          </Col>
 
-          <Col xs={12} sm={8} md={6} lg={5}>
-            <div className="footer-column">
-              <h3 className="footer-column-title">Company</h3>
-              <ul className="footer-links">
-                {companyLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.url}>{link.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Col>
+      {/* ── Decorative blobs ────────────────────────────────────── */}
+      <div className="footer-blob footer-blob-1" aria-hidden="true" />
+      <div className="footer-blob footer-blob-2" aria-hidden="true" />
 
-          <Col xs={12} sm={8} md={6} lg={5}>
-            <div className="footer-column">
-              <h3 className="footer-column-title">Help</h3>
-              <ul className="footer-links">
-                {helpLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.url}>{link.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Col>
+      {/* ── Top tagline band ────────────────────────────────────── */}
+      <div className="footer-band">
+        <span className="footer-band-line" aria-hidden="true" />
+        <span className="footer-band-text">Where The Quality Speaks</span>
+        <span className="footer-band-line" aria-hidden="true" />
+      </div>
 
-          <Col xs={24} sm={8} md={24} lg={6}>
-            <div className="footer-column">
-              <h3 className="footer-column-title">Grievance Redressal</h3>
-              <div className="grievance-info">
-                <p className="grievance-name">Jatin Basantani</p>
-                <p className="grievance-detail">
-                  <a href="mailto:Grievance@shivamagrotech.com">Grievance@shivamagrotech.com</a>
-                </p>
-                <p className="grievance-detail">
-                  Contact: <a href="tel:+919240011124">+91-9240011124</a>
-                </p>
-              </div>
-            </div>
-          </Col>
-        </Row>
+      {/* ── Main columns ────────────────────────────────────────── */}
+      <div className="footer-inner">
 
-        <div className="footer-bottom">
-          <div className="footer-copyright">
-            <p>Copyright © 2026 Modish TractorAurKisan Pvt. Ltd. All rights reserved.</p>
+        {/* Brand */}
+        <div className="footer-brand">
+          <div className="footer-logo-text">
+            <span className="footer-logo-shivam">Shivam</span>
+            <span className="footer-logo-agrotech"> Agrotech</span>
           </div>
-          <div className="footer-social">
-            {socialLinks.map((social, index) => (
-              <a 
-                key={index} 
-                href={social.url} 
-                className="social-icon"
-                aria-label={social.name}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {social.icon}
-              </a>
-            ))}
+          <p className="footer-tagline">
+            One of India's trusted Agri machines &amp; tools brands — delivering
+            reliable tillers, sprayers, brush cutters &amp; more to farmers across
+            the country.
+          </p>
+          <div className="footer-socials">
+            <a href="https://instagram.com" className="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <InstagramOutlined />
+            </a>
+            <a href="https://facebook.com" className="footer-social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <FacebookOutlined />
+            </a>
+            <a href="https://wa.me/918320287041" className="footer-social-btn" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <WhatsAppOutlined />
+            </a>
           </div>
         </div>
+
+        {/* Quick Links */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">
+            <span>Quick Links</span>
+          </h4>
+          <ul className="footer-col-list">
+            {quickLinks.map(link => (
+              <li key={link.name}>
+                <Link to={link.to}>{link.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Categories */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">
+            <span>Categories</span>
+          </h4>
+          <ul className="footer-col-list">
+            {categories.map(cat => (
+              <li key={cat.name}>
+                <Link to={cat.to}>{cat.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">
+            <span>Contact Us</span>
+          </h4>
+          <ul className="footer-contact-list">
+            <li>
+              <span className="footer-contact-icon-wrap"><EnvironmentOutlined /></span>
+              <div>
+                <p className="footer-contact-label">Our Location</p>
+                <span>Rajkot, Gujarat, India</span>
+              </div>
+            </li>
+            <li>
+              <span className="footer-contact-icon-wrap"><PhoneOutlined /></span>
+              <div>
+                <p className="footer-contact-label">Call Us</p>
+                <a href="tel:+918320287041">+91 83202 87041</a>
+              </div>
+            </li>
+            <li>
+              <span className="footer-contact-icon-wrap"><MailOutlined /></span>
+              <div>
+                <p className="footer-contact-label">Email Us</p>
+                <a href="mailto:info@shivamagrotech.com">info@shivamagrotech.com</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* ── Bottom bar ────────────────────────────────────────────── */}
+      <div className="footer-bottom">
+        <span>© 2026 Shivam Agrotech. All rights reserved.</span>
+        <span>Made in India ✦ Trusted by Farmers</span>
       </div>
     </footer>
   );

@@ -1,55 +1,52 @@
 import React from 'react';
-import { Row, Col, Card } from 'antd';
-import { FileTextOutlined, InboxOutlined, CustomerServiceOutlined } from '@ant-design/icons';
+import {
+  SafetyCertificateOutlined,
+  CarOutlined,
+  CustomerServiceOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
 import './TrustedBanner.css';
 
+const trustPoints = [
+  {
+    id: 1,
+    icon: <SafetyCertificateOutlined />,
+    title: '100% OEM Certified',
+    desc: 'Genuine parts with quality assurance',
+  },
+  {
+    id: 2,
+    icon: <CarOutlined />,
+    title: 'Free Delivery',
+    desc: 'On all orders above ₹999',
+  },
+  {
+    id: 3,
+    icon: <CustomerServiceOutlined />,
+    title: '365-Day Support',
+    desc: 'Expert helpline, pre & post purchase',
+  },
+  {
+    id: 4,
+    icon: <TeamOutlined />,
+    title: '10 Lakh+ Farmers',
+    desc: 'Trusted across India',
+  },
+];
+
 function TrustedBanner() {
-  const features = [
-    {
-      id: 1,
-      icon: <FileTextOutlined />,
-      title: 'OEM Products',
-      description: 'Genuine OEM products with quality assurance.'
-    },
-    {
-      id: 2,
-      icon: <InboxOutlined />,
-      title: 'Spare Parts and Accessories',
-      description: 'Check out our spares and accessories section.'
-    },
-    {
-      id: 3,
-      icon: <CustomerServiceOutlined />,
-      title: '365 Days Call Support',
-      description: 'Pre or post purchase assistance from Balwaan experts.'
-    }
-  ];
-
   return (
-    <section className="trusted-banner-section">
-      <div className="trusted-banner-content">
-        <div className="trusted-header">
-          <h2 className="trusted-title">
-            <span className="farmer-emoji">👨‍🌾</span>
-            <span className="heart-emoji">❤️</span>
-            Trusted by 10+ lakhs of farmers
-          </h2>
-          <p className="trusted-subtitle">
-            The best services and features to ensure a seamless buying experience for you.
-          </p>
-        </div>
-
-        <Row gutter={[24, 24]} className="features-row">
-          {features.map(feature => (
-            <Col key={feature.id} xs={24} sm={12} md={8}>
-              <Card className="feature-card">
-                <div className="feature-icon">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+    <section className="trusted-section">
+      <div className="trusted-inner">
+        {trustPoints.map(pt => (
+          <div key={pt.id} className="trust-item">
+            <div className="trust-icon-wrap">{pt.icon}</div>
+            <div className="trust-text">
+              <h4 className="trust-title">{pt.title}</h4>
+              <p className="trust-desc">{pt.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -1,26 +1,156 @@
 .App {
   min-height: 100vh;
-  background: #f5f5f5;
-}
-
-.main-container {
-  display: flex;
-  width: 100%;
-  background: #fff;
+  background: var(--bg, #ffffff);
 }
 
 .main-content {
-  flex: 1;
-  padding: 20px 0;
+  width: 100%;
   overflow-x: hidden;
 }
 
+.main-content section {
+  scroll-margin-top: 80px;
+}
+
+/* ── Global section header (centered, used by several sections) ── */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 20px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold, #2d9e5e);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.section-tag::before {
+  content: '✦';
+  font-size: 9px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text, #1a1a1a);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.section-title em {
+  color: var(--gold, #2d9e5e);
+  font-style: italic;
+}
+
+.section-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--gold, #2d9e5e);
+  margin: 0 auto 14px;
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: var(--text-gray, #666666);
+  margin: 0 auto;
+  max-width: 500px;
+  line-height: 1.65;
+}
+
+/* ── Row header (title left + arrows right) ───────────────────── */
+.section-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+  padding: 0 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.row-header-text .section-tag { margin-bottom: 6px; }
+
+.row-header-text .section-title {
+  margin: 0;
+  font-size: 28px;
+}
+
+/* ── Arrow buttons ────────────────────────────────────────────── */
+.nav-arrow-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold, rgba(45, 158, 94, 0.4));
+  background: #ffffff;
+  color: var(--gold, #2d9e5e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 14px;
+}
+
+.nav-arrow-btn:hover {
+  background: var(--gold, #2d9e5e);
+  color: #1a1a1a;
+  border-color: var(--gold, #2d9e5e);
+}
+
+.header-nav-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Shared status badge (used in product cards) ──────────────── */
+.status-badge {
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ── Floating WhatsApp ────────────────────────────────────────── */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a4d2a;
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.12) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.55);
+  color: #1a4d2a;
+}
+
 @media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-  }
-  
-  .main-content {
-    padding: 15px;
-  }
+  .floating-whatsapp      { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 22px; }
+  .section-title          { font-size: 28px; }
+  .row-header-text .section-title { font-size: 22px; }
 }
