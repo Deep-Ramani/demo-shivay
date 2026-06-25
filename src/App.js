@@ -9,6 +9,8 @@ import Categories from './components/Categories';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import ContactSection from './components/ContactSection';
+import Timeline from './components/Timeline';
+import AboutUs from './components/AboutUs';
 
 function App() {
   const [showLoader,   setShowLoader]   = useState(false);
@@ -41,6 +43,8 @@ function App() {
                   <HeroSection />
                   <section id="trusted"><TrustedBanner /></section>
                   <section id="categories"><Categories /></section>
+                  <section id="about"><AboutUs /></section>
+                  <section id="timeline"><Timeline /></section>
                   <section id="contact"><ContactSection /></section>
                 </main>
                 <Footer />

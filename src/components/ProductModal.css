@@ -1,0 +1,350 @@
+/* ── Overlay ───────────────────────────────────────────────────── */
+.pm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: pmFadeIn 0.25s ease;
+}
+
+@keyframes pmFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Panel ─────────────────────────────────────────────────────── */
+.pm-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  animation: pmSlideUp 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pmSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Close button ──────────────────────────────────────────────── */
+.pm-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.pm-close:hover {
+  background: #1c7a44;
+  border-color: #1c7a44;
+  color: #ffffff;
+}
+
+/* ── Left: image side ──────────────────────────────────────────── */
+.pm-img-side {
+  position: relative;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pm-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  background: #1c7a44;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* ── Main carousel ─────────────────────────────────────────────── */
+.pm-carousel-main {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.pm-car-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.pm-car-img--active {
+  opacity: 1;
+}
+
+/* ── Prev / Next arrows ────────────────────────────────────────── */
+.pm-car-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1a1a;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.pm-car-arrow:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.pm-car-arrow--prev { left: 12px; }
+.pm-car-arrow--next { right: 12px; }
+
+/* ── Counter badge ─────────────────────────────────────────────── */
+.pm-car-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Thumbnail strip ───────────────────────────────────────────── */
+.pm-thumbnails {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: #eeeeee;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.pm-thumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, opacity 0.2s;
+  background: none;
+  opacity: 0.65;
+}
+
+.pm-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pm-thumb--active {
+  border-color: #2d9e5e;
+  opacity: 1;
+}
+
+.pm-thumb:hover {
+  opacity: 1;
+}
+
+/* ── Right: details ────────────────────────────────────────────── */
+.pm-detail-side {
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.pm-category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2d9e5e;
+}
+
+.pm-title {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ── Price row ─────────────────────────────────────────────────── */
+.pm-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pm-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.pm-original {
+  font-size: 16px;
+  color: #aaaaaa;
+  text-decoration: line-through;
+}
+
+.pm-discount {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a5c36;
+  background: #e8f5ee;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Description ───────────────────────────────────────────────── */
+.pm-desc {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Divider ───────────────────────────────────────────────────── */
+.pm-divider {
+  height: 1px;
+  background: #eeeeee;
+  border: none;
+  margin: 4px 0;
+}
+
+/* ── Spec list ─────────────────────────────────────────────────── */
+.pm-specs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pm-spec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #444444;
+  line-height: 1.5;
+}
+
+.pm-spec-icon {
+  color: #2d9e5e;
+  font-size: 9px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* ── WhatsApp CTA ──────────────────────────────────────────────── */
+.pm-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1c7a44;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  padding: 15px 28px;
+  border-radius: 4px;
+  margin-top: auto;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(45, 158, 94, 0.3);
+}
+
+.pm-whatsapp-btn:hover {
+  background: #155c33;
+  transform: translateY(-1px);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(45, 158, 94, 0.4);
+}
+
+.pm-wa-icon {
+  font-size: 18px;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .pm-panel {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .pm-carousel-main {
+    height: 260px;
+  }
+
+  .pm-car-img {
+    position: absolute;
+  }
+
+  .pm-thumb { width: 52px; height: 52px; }
+
+  .pm-detail-side {
+    padding: 28px 24px 32px;
+  }
+
+  .pm-title { font-size: 20px; }
+  .pm-price { font-size: 26px; }
+}

@@ -8,6 +8,7 @@ import './Header.css';
 const navLinks = [
   { key: 'categories', label: 'CATEGORIES', href: '#categories' },
   { key: 'products',   label: 'PRODUCTS',   href: '#products'   },
+  { key: 'about',      label: 'ABOUT US',   href: '#about'      },
   { key: 'contact',    label: 'CONTACTS',   href: '#contact'    },
 ];
 

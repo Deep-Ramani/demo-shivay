@@ -50,7 +50,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 90px 40px 60px;
+  padding: 90px 40px 0px;
 }
 
 .cs-section-tag {

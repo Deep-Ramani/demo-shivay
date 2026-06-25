@@ -228,7 +228,7 @@ function ContactSection() {
       </div>
 
       {/* ── Three contact cards ─────────────────────────────────── */}
-      <div className="cs-cards">
+      {/* <div className="cs-cards">
 
         <div className="cs-card cs-card-gold" data-num="01">
           <div className="cs-card-icon"><PhoneOutlined /></div>
@@ -260,7 +260,7 @@ function ContactSection() {
           </div>
         </div>
 
-      </div>
+      </div> */}
 
       {/* ── Contact form ────────────────────────────────────────── */}
       <div className="cs-form-section">

@@ -1,8 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './HeroSection.css';
+
+const HERO_IMAGES = [
+  { src: 'https://picsum.photos/700/600?random=200', alt: 'Shivam Agrotech Equipment' },
+  { src: 'https://picsum.photos/700/600?random=210', alt: 'Agricultural Machinery' },
+  { src: 'https://picsum.photos/700/600?random=220', alt: 'Farming Solutions' },
+  { src: 'https://picsum.photos/700/600?random=230', alt: 'Crop Equipment' },
+];
+
+const INTERVAL_MS = 3500;
 
 function HeroSection() {
   const sectionRef = useRef(null);
+  const timerRef = useRef(null);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -10,6 +21,23 @@ function HeroSection() {
     }, 80);
     return () => clearTimeout(timer);
   }, []);
+
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent(prev => (prev + 1) % HERO_IMAGES.length);
+    }, INTERVAL_MS);
+  };
+
+  useEffect(() => {
+    resetTimer();
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const goTo = (idx) => {
+    setCurrent(idx);
+    resetTimer();
+  };
 
   const scrollTo = (id) =>
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -57,19 +85,30 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* ── Right: image ───────────────────────────────────────── */}
+        {/* ── Right: carousel ─────────────────────────────────────── */}
         <div className="hero-visual">
-          <img
-            src="https://picsum.photos/700/600?random=200"
-            alt="Shivam Agrotech Equipment"
-            className="hero-img"
-          />
-        </div>
-      </div>
+          <div className="hero-carousel">
+            {HERO_IMAGES.map((img, i) => (
+              <img
+                key={i}
+                src={img.src}
+                alt={img.alt}
+                className={`hero-img${i === current ? ' hero-img--active' : ''}`}
+              />
+            ))}
 
-      {/* Scroll indicator */}
-      <div className="hero-scroll-hint" aria-hidden="true">
-        <span />
+            <div className="hero-carousel-dots">
+              {HERO_IMAGES.map((_, i) => (
+                <button
+                  key={i}
+                  className={`carousel-dot${i === current ? ' carousel-dot--active' : ''}`}
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

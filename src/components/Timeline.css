@@ -1,0 +1,191 @@
+/* ── Section shell ─────────────────────────────────────────────── */
+.timeline-section {
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+  padding: 80px 0 100px;
+}
+
+/* ── Leaf watermark ────────────────────────────────────────────── */
+.timeline-leaf-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cpath d='M150 380 C150 380 20 280 20 160 C20 60 90 10 150 10 C210 10 280 60 280 160 C280 280 150 380 150 380Z' fill='%232d9e5e' opacity='0.08'/%3E%3Cpath d='M150 380 C150 380 150 10 150 10' stroke='%232d9e5e' stroke-width='1.5' opacity='0.08' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right -40px center;
+  background-size: 500px auto;
+  pointer-events: none;
+}
+
+/* ── Inner container ───────────────────────────────────────────── */
+.timeline-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Heading ───────────────────────────────────────────────────── */
+.timeline-heading {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 64px;
+}
+
+/* ── Track: horizontal grid ────────────────────────────────────── */
+.timeline-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 48px;
+}
+
+/* Horizontal connector line across all dots */
+.timeline-line {
+  position: absolute;
+  top: 7px; /* vertically centres on the dot */
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #a8cfb8;
+}
+
+/* ── Each milestone column ─────────────────────────────────────── */
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Dot sitting on the horizontal line */
+.timeline-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid #a8cfb8;
+  background: #ffffff;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Short vertical line from dot to content */
+.timeline-connector {
+  width: 1px;
+  height: 36px;
+  background: #a8cfb8;
+  margin-left: 6px;
+}
+
+/* ── Content block ─────────────────────────────────────────────── */
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline-year {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: #2d9e5e;
+  line-height: 1;
+  display: block;
+}
+
+.timeline-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d9e5e;
+  line-height: 1.35;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  color: #4a5a4f;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Tablet: 2 columns ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Move leaf so it doesn't overlap right column */
+  .timeline-leaf-bg {
+    background-position: right -80px bottom -40px;
+    background-size: 360px auto;
+    opacity: 0.5;
+  }
+
+  .timeline-track {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 56px;
+  }
+
+  /* Hide the single spanning line — each item draws its own */
+  .timeline-line { display: none; }
+
+  /* Per-item horizontal line extending from dot to the right edge */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #a8cfb8;
+  }
+
+  .timeline-item { position: relative; }
+
+  /* Right-column items: line starts from left edge of column */
+  .timeline-item:nth-child(even)::before {
+    left: 0;
+  }
+}
+
+/* ── Mobile: vertical single column ───────────────────────────── */
+@media (max-width: 600px) {
+  .timeline-section { padding: 60px 0 80px; }
+  .timeline-inner   { padding: 0 20px; }
+  .timeline-heading { font-size: 24px; margin-bottom: 36px; }
+
+  .timeline-leaf-bg { display: none; }
+
+  .timeline-track {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+
+  /* Each item: dot on left, content on right */
+  .timeline-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 36px;
+  }
+
+  /* Vertical connecting line between items */
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 15px;
+    bottom: 0;
+    width: 1px;
+    background: #a8cfb8;
+  }
+
+  /* Remove the horizontal line pseudo-element from tablet */
+  .timeline-item::before { display: none; }
+
+  /* Hide the original short vertical connector inside each item */
+  .timeline-connector { display: none; }
+
+  .timeline-dot     { flex-shrink: 0; margin-top: 6px; }
+  .timeline-content { flex: 1; }
+  .timeline-year    { font-size: 48px; }
+  .timeline-title   { font-size: 15px; }
+  .timeline-desc    { font-size: 13px; }
+}
