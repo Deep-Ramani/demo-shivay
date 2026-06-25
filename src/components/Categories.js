@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
+import ProductModal from './ProductModal';
 import './Categories.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,46 +20,46 @@ const CATEGORIES = [
 
 const ALL_PRODUCTS = {
   'OEM Products': [
-    { id: 1,  name: 'Genuine OEM Engine Parts Kit',          desc: 'Factory-certified engine components ensuring peak performance and long-lasting durability.', image: 'https://picsum.photos/400/320?random=201', price: 4499,  originalPrice: 6999,  badge: 'Certified'   },
-    { id: 2,  name: 'OEM Carburettor Assembly',              desc: 'Precision-machined carburettor for smooth fuel delivery across all weather conditions.',     image: 'https://picsum.photos/400/320?random=202', price: 1899,  originalPrice: 2999,  badge: 'Genuine'     },
-    { id: 3,  name: 'OEM Air Filter Set (Pack of 3)',        desc: 'Original air filters providing superior dust protection and improved engine efficiency.',     image: 'https://picsum.photos/400/320?random=203', price: 699,   originalPrice: 1099,  badge: null          },
-    { id: 4,  name: 'OEM Piston & Cylinder Kit',             desc: 'Precision-engineered piston kit for full engine rebuilds and overhauls.',                   image: 'https://picsum.photos/400/320?random=204', price: 3299,  originalPrice: 4999,  badge: 'Hot Deal'    },
+    { id: 1,  name: 'Genuine OEM Engine Parts Kit',          desc: 'Factory-certified engine components ensuring peak performance and long-lasting durability.', image: 'https://picsum.photos/400/320?random=201', price: 4499,  originalPrice: 6999,  badge: 'Certified',   specs: ['Factory-certified OEM grade components', 'Compatible with all Balwaan engine series', 'Anti-corrosion treated finish', '12-month manufacturer warranty', 'ISO 9001 certified quality'] },
+    { id: 2,  name: 'OEM Carburettor Assembly',              desc: 'Precision-machined carburettor for smooth fuel delivery across all weather conditions.',     image: 'https://picsum.photos/400/320?random=202', price: 1899,  originalPrice: 2999,  badge: 'Genuine',     specs: ['Precision CNC-machined body', 'All-weather fuel delivery performance', 'OEM fitment guaranteed', 'Compatible: BX-35 / BX-50B / BX-52 series', '6-month warranty'] },
+    { id: 3,  name: 'OEM Air Filter Set (Pack of 3)',        desc: 'Original air filters providing superior dust protection and improved engine efficiency.',     image: 'https://picsum.photos/400/320?random=203', price: 699,   originalPrice: 1099,  badge: null,          specs: ['Multi-layer filtration media', 'Filters particles down to 10 microns', 'Compatible with BS / BX / PT series', 'Pack of 3 units', 'Easy drop-in replacement'] },
+    { id: 4,  name: 'OEM Piston & Cylinder Kit',             desc: 'Precision-engineered piston kit for full engine rebuilds and overhauls.',                   image: 'https://picsum.photos/400/320?random=204', price: 3299,  originalPrice: 4999,  badge: 'Hot Deal',    specs: ['Chrome-plated cylinder bore', 'Precision-ground piston rings', 'Fits all 52cc Balwaan engines', 'Complete gasket set included', '12-month warranty on components'] },
   ],
   'Battery Sprayers': [
-    { id: 5,  name: 'Balwaan BS-22D Double Motor Sprayer',   desc: 'Dual-motor 12V sprayer delivering consistent pressure across a large 22L tank.',            image: 'https://picsum.photos/400/320?random=205', price: 6499,  originalPrice: 8999,  badge: 'Best Seller' },
-    { id: 6,  name: 'Balwaan BS-20 Single Motor Sprayer',    desc: 'Lightweight everyday sprayer with an easy-grip handle and a 20L capacity tank.',            image: 'https://picsum.photos/400/320?random=206', price: 4999,  originalPrice: 6500,  badge: null          },
-    { id: 7,  name: 'Balwaan Eco-Spray 16L Battery Sprayer', desc: 'Eco-friendly electric sprayer for precise, even crop protection on small fields.',          image: 'https://picsum.photos/400/320?random=207', price: 3799,  originalPrice: 5200,  badge: 'New'         },
-    { id: 8,  name: 'Balwaan Pro-Spray 20L Lithium Sprayer', desc: 'Lithium-battery powered sprayer with 6-hour runtime and auto-pressure control.',            image: 'https://picsum.photos/400/320?random=208', price: 8499,  originalPrice: 11000, badge: 'Trending'    },
+    { id: 5,  name: 'Balwaan BS-22D Double Motor Sprayer',   desc: 'Dual-motor 12V sprayer delivering consistent pressure across a large 22L tank.',            image: 'https://picsum.photos/400/320?random=205', price: 6499,  originalPrice: 8999,  badge: 'Best Seller', specs: ['22L HDPE tank capacity', 'Dual 12V × 12Ah motors', 'Pressure: 2–4 bar adjustable', 'Battery runtime: 4–6 hours per charge', 'Weight: 5.2 kg (empty)'] },
+    { id: 6,  name: 'Balwaan BS-20 Single Motor Sprayer',    desc: 'Lightweight everyday sprayer with an easy-grip handle and a 20L capacity tank.',            image: 'https://picsum.photos/400/320?random=206', price: 4999,  originalPrice: 6500,  badge: null,          specs: ['20L HDPE tank capacity', 'Single 12V × 8Ah motor', 'Pressure: 2–3 bar', 'Battery runtime: 5–7 hours per charge', 'Weight: 4.8 kg (empty)'] },
+    { id: 7,  name: 'Balwaan Eco-Spray 16L Battery Sprayer', desc: 'Eco-friendly electric sprayer for precise, even crop protection on small fields.',          image: 'https://picsum.photos/400/320?random=207', price: 3799,  originalPrice: 5200,  badge: 'New',         specs: ['16L HDPE tank', 'Brushless motor — low noise', 'Pressure: 1.5–3 bar', 'Battery runtime: up to 8 hours', 'Includes adjustable nozzle set'] },
+    { id: 8,  name: 'Balwaan Pro-Spray 20L Lithium Sprayer', desc: 'Lithium-battery powered sprayer with 6-hour runtime and auto-pressure control.',            image: 'https://picsum.photos/400/320?random=208', price: 8499,  originalPrice: 11000, badge: 'Trending',    specs: ['20L tank with lithium-ion battery', 'Auto pressure regulation', 'Runtime: up to 6 hours on full charge', 'Digital charge indicator', 'USB-C charging port'] },
   ],
   'Power Sprayers': [
-    { id: 9,  name: 'Balwaan HTP Sprayer 6.5HP Engine',      desc: 'High-throughput power sprayer with a 50m hose for wide, uniform field coverage.',           image: 'https://picsum.photos/400/320?random=209', price: 32000, originalPrice: 45000, badge: 'Hot Deal'    },
-    { id: 10, name: 'Balwaan Mist Blower MB-52',              desc: 'Backpack mist blower built for orchard and plantation pesticide application.',              image: 'https://picsum.photos/400/320?random=210', price: 16500, originalPrice: 22000, badge: null          },
-    { id: 11, name: 'Balwaan Power Sprayer 5HP Honda',        desc: 'Honda-engine powered sprayer designed for high-pressure, wide-reach spraying.',             image: 'https://picsum.photos/400/320?random=211', price: 28500, originalPrice: 38000, badge: 'Best Seller' },
+    { id: 9,  name: 'Balwaan HTP Sprayer 6.5HP Engine',      desc: 'High-throughput power sprayer with a 50m hose for wide, uniform field coverage.',           image: 'https://picsum.photos/400/320?random=209', price: 32000, originalPrice: 45000, badge: 'Hot Deal',    specs: ['6.5HP 4-stroke petrol engine', '50-metre delivery hose', 'Pressure: up to 40 bar', 'Flow rate: 20–25 L/min', 'Weight: 42 kg'] },
+    { id: 10, name: 'Balwaan Mist Blower MB-52',              desc: 'Backpack mist blower built for orchard and plantation pesticide application.',              image: 'https://picsum.photos/400/320?random=210', price: 16500, originalPrice: 22000, badge: null,          specs: ['52cc 2-stroke engine', '14L tank capacity', 'Air volume: 800 m³/hr', 'Range: up to 8m horizontal', 'Weight: 9.5 kg (empty)'] },
+    { id: 11, name: 'Balwaan Power Sprayer 5HP Honda',        desc: 'Honda-engine powered sprayer designed for high-pressure, wide-reach spraying.',             image: 'https://picsum.photos/400/320?random=211', price: 28500, originalPrice: 38000, badge: 'Best Seller', specs: ['5HP genuine Honda 4-stroke engine', 'Pressure: up to 35 bar', 'Pump: 3-piston diaphragm', 'Flow rate: 18–22 L/min', '30m hose included'] },
   ],
   'Brush Cutters': [
-    { id: 12, name: 'Balwaan BX-52 52cc Side Pack Cutter',   desc: 'Professional-grade side-pack brush cutter for tackling the toughest vegetation.',          image: 'https://picsum.photos/400/320?random=212', price: 8999,  originalPrice: 15999, badge: 'Best Seller' },
-    { id: 13, name: 'Balwaan BX-50B 50cc Backpack Cutter',   desc: 'Ergonomic backpack design engineered for extended field operation without fatigue.',        image: 'https://picsum.photos/400/320?random=213', price: 10499, originalPrice: 14000, badge: null          },
-    { id: 14, name: 'Balwaan BX-35 Shoulder Brush Cutter',   desc: 'Compact shoulder-type cutter ideal for small farms and residential gardens.',              image: 'https://picsum.photos/400/320?random=214', price: 6299,  originalPrice: 8500,  badge: 'New'         },
+    { id: 12, name: 'Balwaan BX-52 52cc Side Pack Cutter',   desc: 'Professional-grade side-pack brush cutter for tackling the toughest vegetation.',          image: 'https://picsum.photos/400/320?random=212', price: 8999,  originalPrice: 15999, badge: 'Best Seller', specs: ['52cc 2-stroke engine', '3-tooth blade + nylon head included', 'Weight: 10.2 kg', 'Side-pack frame for reduced fatigue', '2-year warranty'] },
+    { id: 13, name: 'Balwaan BX-50B 50cc Backpack Cutter',   desc: 'Ergonomic backpack design engineered for extended field operation without fatigue.',        image: 'https://picsum.photos/400/320?random=213', price: 10499, originalPrice: 14000, badge: null,          specs: ['50cc 2-stroke engine', 'Padded ergonomic backpack harness', 'Weight: 11.5 kg', '255mm blade diameter', 'Anti-vibration handle system'] },
+    { id: 14, name: 'Balwaan BX-35 Shoulder Brush Cutter',   desc: 'Compact shoulder-type cutter ideal for small farms and residential gardens.',              image: 'https://picsum.photos/400/320?random=214', price: 6299,  originalPrice: 8500,  badge: 'New',         specs: ['35cc 2-stroke engine', 'Lightweight: 7.8 kg', 'Single shoulder harness', 'Nylon cord head + blade included', '1-year warranty'] },
   ],
   'Water Pumps': [
-    { id: 15, name: 'Balwaan Petrol Water Pump 2 Inch',      desc: 'Compact petrol pump delivering high-volume water flow for reliable field irrigation.',      image: 'https://picsum.photos/400/320?random=215', price: 14999, originalPrice: 18500, badge: null          },
-    { id: 16, name: 'Balwaan 3-Inch High Flow Pump',         desc: '3-inch inlet/outlet engine pump for rapid drainage and large-scale irrigation.',            image: 'https://picsum.photos/400/320?random=216', price: 19500, originalPrice: 25000, badge: 'Hot Deal'    },
-    { id: 17, name: 'Balwaan Electric Submersible Pump',     desc: 'Heavy-duty submersible pump for deep borewell and tank irrigation.',                       image: 'https://picsum.photos/400/320?random=217', price: 8999,  originalPrice: 12000, badge: 'New'         },
+    { id: 15, name: 'Balwaan Petrol Water Pump 2 Inch',      desc: 'Compact petrol pump delivering high-volume water flow for reliable field irrigation.',      image: 'https://picsum.photos/400/320?random=215', price: 14999, originalPrice: 18500, badge: null,          specs: ['5.5HP 4-stroke petrol engine', '2-inch inlet & outlet', 'Flow rate: 500 L/min', 'Max head: 28 metres', 'Weight: 19 kg'] },
+    { id: 16, name: 'Balwaan 3-Inch High Flow Pump',         desc: '3-inch inlet/outlet engine pump for rapid drainage and large-scale irrigation.',            image: 'https://picsum.photos/400/320?random=216', price: 19500, originalPrice: 25000, badge: 'Hot Deal',    specs: ['6.5HP 4-stroke engine', '3-inch inlet & outlet', 'Flow rate: 1100 L/min', 'Max head: 26 metres', 'Weight: 28 kg'] },
+    { id: 17, name: 'Balwaan Electric Submersible Pump',     desc: 'Heavy-duty submersible pump for deep borewell and tank irrigation.',                       image: 'https://picsum.photos/400/320?random=217', price: 8999,  originalPrice: 12000, badge: 'New',         specs: ['1.5HP electric motor', 'Max depth: 25 metres', 'Flow rate: 150 L/min', 'Stainless steel impeller', 'IP68 waterproof rated'] },
   ],
   'Car Washers': [
-    { id: 18, name: 'Balwaan Pressure Washer PW-150',        desc: '150-bar electric pressure washer that delivers a spotless vehicle clean every time.',       image: 'https://picsum.photos/400/320?random=218', price: 8499,  originalPrice: 11999, badge: 'New'         },
-    { id: 19, name: 'Balwaan Heavy-Duty Jet Washer PW-200',  desc: '200-bar commercial-grade jet washer built for stubborn grime and large surfaces.',          image: 'https://picsum.photos/400/320?random=219', price: 13999, originalPrice: 19000, badge: null          },
-    { id: 20, name: 'Balwaan Portable Foam Washer PW-100',   desc: 'Compact foam washer with snap-on foam cannon for rich, touchless car washing.',             image: 'https://picsum.photos/400/320?random=220', price: 5499,  originalPrice: 7500,  badge: 'Trending'    },
+    { id: 18, name: 'Balwaan Pressure Washer PW-150',        desc: '150-bar electric pressure washer that delivers a spotless vehicle clean every time.',       image: 'https://picsum.photos/400/320?random=218', price: 8499,  originalPrice: 11999, badge: 'New',         specs: ['1800W induction motor', 'Pressure: 150 bar max', 'Flow rate: 6.5 L/min', '5m high-pressure hose included', 'Thermal overload protection'] },
+    { id: 19, name: 'Balwaan Heavy-Duty Jet Washer PW-200',  desc: '200-bar commercial-grade jet washer built for stubborn grime and large surfaces.',          image: 'https://picsum.photos/400/320?random=219', price: 13999, originalPrice: 19000, badge: null,          specs: ['2200W induction motor', 'Pressure: 200 bar max', 'Flow rate: 8 L/min', 'Adjustable lance + foam cannon included', 'Self-priming pump'] },
+    { id: 20, name: 'Balwaan Portable Foam Washer PW-100',   desc: 'Compact foam washer with snap-on foam cannon for rich, touchless car washing.',             image: 'https://picsum.photos/400/320?random=220', price: 5499,  originalPrice: 7500,  badge: 'Trending',    specs: ['1400W motor', 'Pressure: 100 bar max', 'Snap-on foam cannon included', 'Compact & portable design', 'Weight: 4.2 kg'] },
   ],
   'Chainsaws': [
-    { id: 21, name: 'Balwaan CS-18 Professional Chainsaw',   desc: 'Precision chainsaw with an 18-inch bar for timber cutting and land clearing.',              image: 'https://picsum.photos/400/320?random=221', price: 8750,  originalPrice: 12500, badge: 'Trending'    },
-    { id: 22, name: 'Balwaan CS-14 Compact Chainsaw',        desc: 'Lightweight 14-inch chainsaw perfect for pruning and medium tree felling tasks.',           image: 'https://picsum.photos/400/320?random=222', price: 5999,  originalPrice: 8200,  badge: null          },
-    { id: 23, name: 'Balwaan CS-22 Heavy-Duty Chainsaw',     desc: '22-inch heavy-duty chainsaw for large timber and dense forest clearing.',                  image: 'https://picsum.photos/400/320?random=223', price: 14999, originalPrice: 20000, badge: 'Best Seller' },
+    { id: 21, name: 'Balwaan CS-18 Professional Chainsaw',   desc: 'Precision chainsaw with an 18-inch bar for timber cutting and land clearing.',              image: 'https://picsum.photos/400/320?random=221', price: 8750,  originalPrice: 12500, badge: 'Trending',    specs: ['52cc 2-stroke engine', '18-inch guide bar', 'Anti-vibration system', 'Chain brake safety feature', 'Weight: 5.6 kg'] },
+    { id: 22, name: 'Balwaan CS-14 Compact Chainsaw',        desc: 'Lightweight 14-inch chainsaw perfect for pruning and medium tree felling tasks.',           image: 'https://picsum.photos/400/320?random=222', price: 5999,  originalPrice: 8200,  badge: null,          specs: ['38cc 2-stroke engine', '14-inch guide bar', 'Low-kickback chain', 'Tool-free chain tensioning', 'Weight: 4.8 kg'] },
+    { id: 23, name: 'Balwaan CS-22 Heavy-Duty Chainsaw',     desc: '22-inch heavy-duty chainsaw for large timber and dense forest clearing.',                  image: 'https://picsum.photos/400/320?random=223', price: 14999, originalPrice: 20000, badge: 'Best Seller', specs: ['65cc 2-stroke engine', '22-inch guide bar', 'Decompression valve for easy start', 'Automatic chain lubrication', 'Weight: 7.2 kg'] },
   ],
   'Tillers': [
-    { id: 24, name: 'Balwaan Electric Tiller ET-6',          desc: 'Electric cultivator that breaks and aerates soil for optimal crop growth.',                image: 'https://picsum.photos/400/320?random=224', price: 19999, originalPrice: 25000, badge: 'New'         },
-    { id: 25, name: 'Balwaan Petrol Tiller PT-65',           desc: 'Powerful 65cc petrol tiller for deep soil cultivation across large fields.',               image: 'https://picsum.photos/400/320?random=225', price: 28000, originalPrice: 35000, badge: null          },
-    { id: 26, name: 'Balwaan Mini Tiller MT-35',             desc: 'Compact mini tiller ideal for raised-bed gardens and tight row spacing.',                  image: 'https://picsum.photos/400/320?random=226', price: 12500, originalPrice: 17000, badge: 'Hot Deal'    },
+    { id: 24, name: 'Balwaan Electric Tiller ET-6',          desc: 'Electric cultivator that breaks and aerates soil for optimal crop growth.',                image: 'https://picsum.photos/400/320?random=224', price: 19999, originalPrice: 25000, badge: 'New',         specs: ['1500W electric motor', 'Tilling width: 40 cm', 'Tilling depth: up to 20 cm', '6 heavy-duty steel tines', 'Weight: 18 kg'] },
+    { id: 25, name: 'Balwaan Petrol Tiller PT-65',           desc: 'Powerful 65cc petrol tiller for deep soil cultivation across large fields.',               image: 'https://picsum.photos/400/320?random=225', price: 28000, originalPrice: 35000, badge: null,          specs: ['65cc 4-stroke petrol engine', 'Tilling width: 60 cm', 'Tilling depth: up to 30 cm', '4-speed forward + 1 reverse', 'Weight: 65 kg'] },
+    { id: 26, name: 'Balwaan Mini Tiller MT-35',             desc: 'Compact mini tiller ideal for raised-bed gardens and tight row spacing.',                  image: 'https://picsum.photos/400/320?random=226', price: 12500, originalPrice: 17000, badge: 'Hot Deal',    specs: ['35cc 2-stroke engine', 'Tilling width: 25 cm', 'Tilling depth: up to 18 cm', 'Foldable handles for storage', 'Weight: 12 kg'] },
   ],
 };
 
@@ -68,8 +69,11 @@ const ALL_FLAT = Object.entries(ALL_PRODUCTS).flatMap(([cat, list]) =>
 );
 
 function Categories() {
-  const [selected, setSelected] = useState('All');
-  const [animKey,  setAnimKey]  = useState(0);
+  const [selected,        setSelected]        = useState('All');
+  const [animKey,         setAnimKey]         = useState(0);
+  const [activeProduct,   setActiveProduct]   = useState(null);
+
+  const closeModal = useCallback(() => setActiveProduct(null), []);
 
   const sectionRef = useRef(null);
   const canvasRef  = useRef(null);
@@ -271,6 +275,7 @@ function Categories() {
   const handleTabClick = tab => { setSelected(tab); setAnimKey(k => k + 1); };
 
   return (
+    <>
     <section className="categories-section" id="categories" ref={sectionRef}>
 
       {/* WebGL background canvas */}
@@ -376,7 +381,10 @@ function Categories() {
                     <span className="cat-prod-savings">{Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)}% OFF</span>
                   </div>
                   <div className="cat-prod-actions">
-                    <button className="cat-prod-btn-view">
+                    <button
+                      className="cat-prod-btn-view"
+                      onClick={() => setActiveProduct({ ...p })}
+                    >
                       View Details
                     </button>
                     <button className="cat-prod-btn-enquire">Enquire</button>
@@ -389,6 +397,11 @@ function Categories() {
         </div>
       </div>
     </section>
+
+    {activeProduct && (
+      <ProductModal product={activeProduct} onClose={closeModal} />
+    )}
+    </>
   );
 }
 
