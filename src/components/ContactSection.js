@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { PhoneOutlined, SendOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
