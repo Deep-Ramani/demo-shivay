@@ -33,6 +33,7 @@ function ProductModal({ product, onClose }) {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', onKey);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onClose, current]);
 
   const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
